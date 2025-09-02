@@ -1,4 +1,4 @@
-# Ai ตรวจจับผู้บุกรุกด้วย Opencv
+#Aiตรวจจับผู้บุกรุกด้วย Opencv
 from ultralytics import YOLO
 import cv2
 import requests
@@ -7,7 +7,7 @@ from datetime import datetime
 import time
 
 
-# LINE Messaging API settings
+#LINE Messaging API settings
 
 LINE_CHANNEL_ACCESS_TOKEN = os.getenv("LINE_CHANNEL_ACCESS_TOKEN", "YOU LINE_CHANNEL_ACCESS_TOKEN")
 LINE_USER_ID = os.getenv("LINE_USER_ID", "YOU LINE_USER_ID")
@@ -36,16 +36,16 @@ def push_line_text(token: str, to_user_id: str, message: str) -> bool:
         print(f"❌ ข้อผิดพลาดส่ง LINE ข้อความ: {e}")
         return False
 
-# ใช้โมเดลYOLOv8 โมเดลn หากรันแล้วERROR ให้ทำการติดตั้ง YOLO ก่อนนะครับ
+#ใช้โมเดลYOLOv8 โมเดลn หากรันแล้วERROR ให้ทำการติดตั้ง YOLO ก่อนนะครับ
 model = YOLO("yolov8n.pt")
 
-#  เปิดกล้องใช้คำสั่งนี้ครับ
+#เปิดกล้องใช้คำสั่งนี้ครับ
 cap = cv2.VideoCapture(0)
 
-# หากคูณจะใช้เป็นVideoให้ใช้คำสั่งนี้ครับ
+#หากคูณจะใช้เป็นVideoให้ใช้คำสั่งนี้ครับ
 cap = cv2.VideoCapture("video") 
 
-# ตัวแปรสำหรับป้องกันการแจ้งเตือนซ้ำ
+#ตัวแปรสำหรับป้องกันการแจ้งเตือนซ้ำ
 last_notify_time = 0
 notify_cooldown = 5  # เว้นช่วงแจ้งเตือน 5 วินาที
 
@@ -106,6 +106,6 @@ while True:
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
-# ปิดกล้องและหน้าต่าง
+#ปิดกล้องและหน้าต่าง
 cap.release()
 cv2.destroyAllWindows()
