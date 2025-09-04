@@ -55,11 +55,11 @@ while True:
     if not ret:
         break
 
-    # กำหนดโซนตรวจจับ
+    #กำหนดโซนตรวจจับ
     zone_x1, zone_y1, zone_x2, zone_y2 = 0, 0, 0, 0  # <--บรรทัดนี้คำสัญ ซึ่งคำสั่งนี้จะเป็นตัวกำหนด เขตที่เมื่อมีผู้บุกรุกเข้ามาในเขตนี้จะทำการแจ้งเตือนโปรดตั้งค่าบรรทัดนี้ก่อนใช้งาน
     cv2.rectangle(frame, (zone_x1, zone_y1), (zone_x2, zone_y2), (0, 255, 255), 2)
 
-    # ตรวจจับวัตถุด้วย YOLO
+    #ตรวจจับวัตถุด้วย YOLO
     results = model(frame)
 
     for result in results:
@@ -91,7 +91,7 @@ while True:
                         remaining_time = notify_cooldown - (current_time - last_notify_time)
                         print(f"รอแจ้งเตือนอีก {remaining_time:.1f} วินาที")
 
-                # วาดกรอบ
+                #วาดกรอบ
                 cv2.rectangle(frame, (int(x1), int(y1)), (int(x2), int(y2)), (0, 255, 0), 2)
                 cv2.circle(frame, (int(center_x), int(center_y)), 4, (0, 0, 255), -1)
                 tag = f"{label} {conf:.2f}"
@@ -99,10 +99,10 @@ while True:
                     tag += " IN-ZONE"
                 cv2.putText(frame, tag, (int(x1), int(y1)-10), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0,255,0), 2)
 
-    # แสดงภาพ
+    #แสดงภาพ
     cv2.imshow("YOLO Detection", frame)
 
-    # ออกจากโปรแกรมถ้ากด 'q'
+    #ออกจากโปรแกรมถ้ากด 'q'
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
